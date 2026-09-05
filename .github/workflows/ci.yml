@@ -18,7 +18,7 @@ jobs:
     - name: Build Docker Image
       run : docker build -t men-boiler-plate-actions .
     - name: Push to Docker repository
-      run: docker push codebug007/men-boilerplate-actions:latest
+      run: docker push codebug007/men-boiler-plate-actions:latest
       
       
       
