@@ -1,0 +1,60 @@
+name: Men JWT boiler-plate Artifacts
+on:
+    workflow_dispatch
+
+jobs:
+  nest-ci-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build and push
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          tags: men-boiler-plate-actions:v1.0.0
+      
+      - name: Run Container
+        run: |
+          docker run -d -p 5001:5001 --name men-boiler-plate-actions-container men-boiler-plate-actions:v1.0.0
+
+      - name: Generate Smoke test report
+        run: |
+          sleep 5
+          curl http://localhost:5001/api/greet > smoke-test-report.txt
+      
+      - name: Export Container logs
+        run: | 
+          docker logs men-boiler-plate-actions > container-logs.txt
+        
+      - name: Upload artifacts
+        uses: actions/upload-articats@7
+        with:
+          name: men-boiler-plate-artifacts
+          path: |
+            smoke-test-report.txt 
+            container-logs.txt          
+          
+  review-job:
+    runs-on: ubuntu-latest
+
+    needs:
+      - nest-ci-job
+    
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@7
+        with: 
+          name: men-boiler-plate-artifacts
+
+      - name: Review Dowloaded Artifact
+        run: |
+          echo "======== smoke test report ========="
+          cat smoke-test-report.txt
+
+          echo " "
+          echo "======== Container logs ========="
+          cat container-logs.txt
+          
