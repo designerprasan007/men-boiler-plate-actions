@@ -16,7 +16,7 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       
     - name: Build and Push Docker Image
-      run : docker build -t men-boiler-plate-actions .
+      run : docker build -t men-boiler-plate-actions:latest .
     - name: Push to Docker repository
       run: docker push men-boiler-plate-actions:latest
       
