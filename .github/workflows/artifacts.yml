@@ -27,7 +27,7 @@ jobs:
       
       - name: Export Container logs
         run: | 
-          docker logs men-boiler-plate-actions > container-logs.txt
+          docker logs men-boiler-plate-actions-container > container-logs.txt
         
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
