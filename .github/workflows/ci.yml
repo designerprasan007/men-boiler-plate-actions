@@ -13,10 +13,10 @@ jobs:
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       
     - name: Build and Push Docker Image
-      run : docker build -t men-boiler-plate-actions:latest .
+      run : docker build -t men-boiler-plate-actions .
     - name: Push to Docker repository
       run: docker push men-boiler-plate-actions:latest
       
