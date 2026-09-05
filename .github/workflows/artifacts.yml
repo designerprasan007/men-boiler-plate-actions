@@ -30,7 +30,7 @@ jobs:
           docker logs men-boiler-plate-actions > container-logs.txt
         
       - name: Upload artifacts
-        uses: actions/upload-artifact@7
+        uses: actions/upload-artifact@v7
         with:
           name: men-boiler-plate-artifacts
           path: |
@@ -45,7 +45,7 @@ jobs:
     
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@7
+        uses: actions/download-artifact@v7
         with: 
           name: men-boiler-plate-artifacts
 
