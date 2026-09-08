@@ -34,7 +34,7 @@ jobs:
 
 
             - name: Display cache status
-              run: echo "Cache hit ${{ steps.npm-cache.outputs.cache-hit }}"
+              run: echo "Cache hit ${{ steps.npm-cache.outputs.cache-hit }}, cache directory ${{steps.npm-cache-dir.outputs.dir}}"
             - name: Install Dependencies
               run: npm ci
     
@@ -63,9 +63,6 @@ jobs:
         - name: Display cache status
           run: echo "Cache hit ${{ steps.npm-cache.outputs.cache-hit }}"
         
-        - name: Display cache status
-          run: echo "Cache hit ${{ steps.npm-cache.outputs.cache-hit }}"
-          
         - name: Install Dependencies
           run: npm ci
 
